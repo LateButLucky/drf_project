@@ -1,0 +1,11 @@
+[
+  {
+    "model": "lms.course",
+    "pk": 1,
+    "fields": {
+      "title": "Course 1",
+      "preview": "http://example.com/preview.jpg",
+      "description": "Course 1 Description"
+    }
+  }
+]

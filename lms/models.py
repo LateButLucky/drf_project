@@ -14,7 +14,7 @@ class Lesson(models.Model):
     course = models.ForeignKey(Course, related_name='lessons', on_delete=models.CASCADE)
     title = models.CharField(max_length=255)
     description = models.TextField()
-    preview = models.ImageField(upload_to='lesson_previews/')
+    preview = models.URLField()
     video_url = models.URLField()
 
     def __str__(self):

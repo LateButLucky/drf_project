@@ -1,0 +1,13 @@
+[
+  {
+    "model": "lms.lesson",
+    "pk": 1,
+    "fields": {
+      "course": 1,
+      "title": "Lesson 1",
+      "description": "Lesson 1 Description",
+      "preview": "http://example.com/lesson_preview.jpg",
+      "video_url": "http://example.com/video.mp4"
+    }
+  }
+]
