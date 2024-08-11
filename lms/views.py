@@ -10,6 +10,7 @@ from users.permissions import IsModerator, IsOwner
 from .paginators import CustomPagination
 from .services import create_stripe_product, create_stripe_price, create_stripe_checkout_session
 from django.conf import settings
+from .tasks import send_course_update_email
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
@@ -32,6 +33,12 @@ class CourseViewSet(viewsets.ModelViewSet):
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
+
+    def perform_update(self, serializer):
+        instance = serializer.save()
+        subscribers = Subscription.objects.filter(course=instance)
+        for subscription in subscribers:
+            send_course_update_email.delay(instance.title, subscription.user.email)
 
 
 class LessonViewSet(viewsets.ModelViewSet):
