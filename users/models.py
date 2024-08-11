@@ -62,9 +62,10 @@ class Payment(models.Model):
         ('transfer', 'Перевод на счет'),
     ]
 
-    user = models.ForeignKey('users.User', on_delete=models.CASCADE)
+    user = models.ForeignKey('users.User', on_delete=models.CASCADE, related_name='user_payments')
     date = models.DateTimeField(auto_now_add=True)
-    course = models.ForeignKey('lms.Course', null=True, blank=True, on_delete=models.SET_NULL)
+    course = models.ForeignKey('lms.Course', null=True, blank=True, on_delete=models.SET_NULL,
+                               related_name='course_payments')
     lesson = models.ForeignKey('lms.Lesson', null=True, blank=True, on_delete=models.SET_NULL)
     amount = models.DecimalField(max_digits=10, decimal_places=2)
     payment_method = models.CharField(max_length=10, choices=PAYMENT_METHODS)
